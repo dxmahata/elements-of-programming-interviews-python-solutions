@@ -11,6 +11,9 @@ class Vertex:
         self.connectedTo = {}
         self.color = "white"
         self.distance = sys.maxint
+        self.firstVisitTime = 0
+        self.lastVisitTime = 0
+        self.predecessor = None
         
 
     def addNeighbor(self,nbr,weight=0):
@@ -53,6 +56,30 @@ class Vertex:
         'black' -> explored/processed"""
         return self.color
     
+    def setFirstVisitTime(self,t):
+        """Sets the time at which DFS first visits the vertex"""
+        self.firstVisitTime = t
+        
+    def getFirstVisitTime(self):
+        """Gets the time at which DFS first visits the vertex"""
+        return self.firstVisitTime
+    
+    
+    def setLastVisitTime(self,t):
+        """Sets the time at which DFS last visits the vertex"""
+        self.lastVisitTime = t
+        
+    def getLastVisitTime(self):
+        """Gets the time at which DFS last visits the vertex"""
+        return self.lastVisitTime
+
+    def setPredecessor(self,pred):
+        self.predecessor = pred
+        
+    def getPredecessor(self):
+        return self.predecessor
+
+    
     
     
 class Graph:
@@ -79,7 +106,7 @@ class Graph:
         return n in self.vertList
 
     def addEdge(self,f,t,cost=0):
-        """adds an edge between vertex with id f and a vertex with id t, cost
+        """adds an undirected edge between vertex with id f and a vertex with id t, cost
         being the weight of the edge."""
         if f not in self.vertList:
             self.addVertex(f)
