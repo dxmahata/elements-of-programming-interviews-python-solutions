@@ -11,8 +11,8 @@ class Vertex:
         self.connectedTo = {}
         self.color = "white"
         self.distance = sys.maxint
-        self.firstVisitTime = 0
-        self.lastVisitTime = 0
+        self.entryTime = 0
+        self.exitTime = 0
         self.predecessor = None
         
 
@@ -56,22 +56,22 @@ class Vertex:
         'black' -> explored/processed"""
         return self.color
     
-    def setFirstVisitTime(self,t):
+    def setEntryTime(self,t):
         """Sets the time at which DFS first visits the vertex"""
-        self.firstVisitTime = t
+        self.entryTime = t
         
-    def getFirstVisitTime(self):
+    def getEntryTime(self):
         """Gets the time at which DFS first visits the vertex"""
-        return self.firstVisitTime
+        return self.entryTime
     
     
-    def setLastVisitTime(self,t):
+    def setExitTime(self,t):
         """Sets the time at which DFS last visits the vertex"""
-        self.lastVisitTime = t
+        self.exitTime = t
         
-    def getLastVisitTime(self):
+    def getExitTime(self):
         """Gets the time at which DFS last visits the vertex"""
-        return self.lastVisitTime
+        return self.exitTime
 
     def setPredecessor(self,pred):
         self.predecessor = pred
