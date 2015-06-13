@@ -14,6 +14,8 @@ class Vertex:
         self.entryTime = 0
         self.exitTime = 0
         self.predecessor = None
+        self.indegree = 0
+        self.outdegree = 0
         
 
     def addNeighbor(self,nbr,weight=0):
@@ -78,6 +80,18 @@ class Vertex:
         
     def getPredecessor(self):
         return self.predecessor
+    
+    def setInDegree(self,indegree):
+        self.indegree = indegree
+        
+    def getInDegree(self):
+        return self.indegree
+    
+    def setOutDegree(self,outdegree):
+        self.outdegree = outdegree
+        
+    def getOutDegree(self):
+        return self.outdegree
 
     
     
@@ -113,7 +127,12 @@ class Graph:
         if t not in self.vertList:
             self.addVertex(t)
         self.vertList[f].addNeighbor(self.vertList[t], cost)
+        self.vertList[f].setOutDegree(self.vertList[f].getOutDegree()+1)
+        self.vertList[t].setInDegree(self.vertList[t].getInDegree()+1)
+        
         self.vertList[t].addNeighbor(self.vertList[f], cost)
+        self.vertList[t].setOutDegree(self.vertList[t].getOutDegree()+1)
+        self.vertList[f].setInDegree(self.vertList[f].getInDegree()+1)
 
     def getVertices(self):
         """gets the list of vertices of the graph"""
@@ -133,6 +152,9 @@ class DirectedGraph(Graph):
         if t not in self.vertList:
             self.addVertex(t)
         self.vertList[f].addNeighbor(self.vertList[t], cost)
+        self.vertList[f].setOutDegree(self.vertList[f].getOutDegree()+1)
+        self.vertList[t].setInDegree(self.vertList[t].getInDegree()+1)
+
 
 
 
