@@ -24,19 +24,23 @@ class Solution:
         return self.englishDictList
     
     def anagram_partition(self):
-        anagram_partition_set = []
-        for entries in self.englishDictList:
-            sortedEntry = sorted(entries) #O(N*lgN)
-            sortedEntryString = "".join(sortedEntry)
-            if sortedEntryString in self.anagramDict:
-                self.anagramDict[sortedEntryString].append(entries)
-            else:
-                self.anagramDict[sortedEntryString] = [entries]
+        
+        if not self.englishDictList:
+            return []
+        else:
+            anagram_partition_set = []
+            for entries in self.englishDictList:
+                sortedEntry = sorted(entries) #O(N*lgN)
+                sortedEntryString = "".join(sortedEntry)
+                if sortedEntryString in self.anagramDict:
+                    self.anagramDict[sortedEntryString].append(entries)
+                else:
+                    self.anagramDict[sortedEntryString] = [entries]
+                    
+            for entries in self.anagramDict.items():
+                anagram_partition_set.append(entries[1])
                 
-        for entries in self.anagramDict.items():
-            anagram_partition_set.append(entries[1])
-            
-        return anagram_partition_set
+            return anagram_partition_set
              
     
 if __name__ == "__main__":
