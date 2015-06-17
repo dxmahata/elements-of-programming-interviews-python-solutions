@@ -72,7 +72,7 @@ if __name__ == "__main__":
     
     soln = Solution()
     
-    soln.set_decoded_string("aaaabcccaa")
+    soln.set_decoded_string("aaaabcccaa".lower())
     soln.run_length_encoding()
     print soln.get_encoded_string()
     print soln.get_decoded_string()

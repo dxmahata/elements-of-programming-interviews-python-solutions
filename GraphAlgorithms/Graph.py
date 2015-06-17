@@ -16,6 +16,7 @@ class Vertex:
         self.predecessor = None
         self.indegree = 0
         self.outdegree = 0
+        self.layer = None
         
 
     def addNeighbor(self,nbr,weight=0):
