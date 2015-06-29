@@ -1,9 +1,8 @@
 '''
-Created on Jun 26, 2015
+Created on Jun 28, 2015
 
 @author: Debanjan Mahata
 '''
-
 class Node:
     def __init__(self, data):
         self.data = data
@@ -67,29 +66,40 @@ class LinkedList:
             link_list.append(current.data)
             current = current.next
         return link_list
+    
+    def is_palindrome(self):
+        current = self.head
+        runner = self.head
+        
+        stack = []
+        
+        while runner != None and runner.next != None:
+            stack.append(current.data)
+            current = current.next
+            runner = runner.next 
             
+        if runner != None:
+            current = current.next
             
+        while current != None:
+            if current.data == stack.pop():
+                current = current.next
+            else:
+                return False
+            
+        return True
+
+
 if __name__ == "__main__":
     
-    head = Node("Jyoti")
+    A = ["m","a","d","a","m"]
+    
+    head = Node(1)
     
     ln = LinkedList()
     ln.head = head
     
-    ln.insert_at_end("Debanjan")
-    ln.insert_at_end("Anil")
-    ln.insert_at_end("Mamata")
-    ln.insert_at_end("Bhola")
-    
-    print ln.print_list()
-    
-    print ln.search("Mamata")
-    
-    ln.delete("Anil")
-    ln.delete("macchar")
-    ln.delete("Bhola")
-    ln.delete("Jyoti")
-    ln.insert_at_front("Chunki")
-    
-    print ln.print_list()
-    
+    for entries in A:
+        ln.insert_at_end(entries)
+        
+    print ln.is_palindrome()

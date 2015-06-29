@@ -1,8 +1,9 @@
 '''
-Created on Jun 26, 2015
+Created on Jun 28, 2015
 
 @author: Debanjan Mahata
 '''
+
 
 class Node:
     def __init__(self, data):
@@ -67,29 +68,80 @@ class LinkedList:
             link_list.append(current.data)
             current = current.next
         return link_list
+    
+def create_loop(lList):
+    current = lList.head
+    
+    while current.next != None:
+        current = current.next
+        
+    current.next =  lList.head
+
+    
+def has_loop(lList):
+    
+    slow = lList.head
+    fast = lList.head
+    
+    hasLoop = False
+    
+    while fast != None and fast.next != None:
+        slow = slow.next
+        fast = fast.next.next
+        
+        if slow == fast:
+            hasLoop = True
+            break
+        
+    return hasLoop
+
+def start_of_loop(lList):
+    
+    slow = lList.head
+    fast = lList.head
+    
+    hasLoop = False
+    
+    while fast != None and fast.next != None:
+        slow = slow.next
+        fast = fast.next.next
+        
+        if slow == fast:
+            hasLoop = True
+            break
+        
+    if hasLoop == False:
+        return None
+    else:
+        slow = head
+        while slow != fast:
+            slow = slow.next
+            fast = fast.next
             
-            
+        return fast
+        
+
+
 if __name__ == "__main__":
     
-    head = Node("Jyoti")
+    A = [0,0,0,2,3,1,2,1,3,4,5,2,4,21,2]
+    
+    head = Node(1)
     
     ln = LinkedList()
     ln.head = head
     
-    ln.insert_at_end("Debanjan")
-    ln.insert_at_end("Anil")
-    ln.insert_at_end("Mamata")
-    ln.insert_at_end("Bhola")
-    
+    for entries in A:
+        ln.insert_at_end(entries)
+        
     print ln.print_list()
+    create_loop(ln)
     
-    print ln.search("Mamata")
+    print has_loop(ln)
+    print start_of_loop(ln).data
     
-    ln.delete("Anil")
-    ln.delete("macchar")
-    ln.delete("Bhola")
-    ln.delete("Jyoti")
-    ln.insert_at_front("Chunki")
     
-    print ln.print_list()
+
+
+    
     

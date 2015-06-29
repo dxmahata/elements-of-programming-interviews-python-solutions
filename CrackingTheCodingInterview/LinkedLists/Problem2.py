@@ -1,5 +1,5 @@
 '''
-Created on Jun 26, 2015
+Created on Jun 28, 2015
 
 @author: Debanjan Mahata
 '''
@@ -67,29 +67,41 @@ class LinkedList:
             link_list.append(current.data)
             current = current.next
         return link_list
+    
+    def kthelement_from_end(self, k):
+        current = self.head
+        runner = self.head
+        
+        for iPtr in range(0,k-1):
+            if runner == None:
+                return None
+            else:
+                runner = runner.next
+                
+        if runner == None:
+            return None
+        
+        while runner.next != None:
+            current = current.next
+            runner = runner.next
             
-            
+        return current
+
+
 if __name__ == "__main__":
     
-    head = Node("Jyoti")
+    A = [0,0,0,2,3,1,2,1,3,4,5,2,4,21,2]
+    
+    head = Node(1)
     
     ln = LinkedList()
     ln.head = head
     
-    ln.insert_at_end("Debanjan")
-    ln.insert_at_end("Anil")
-    ln.insert_at_end("Mamata")
-    ln.insert_at_end("Bhola")
+    for entries in A:
+        ln.insert_at_end(entries)
+        
+    print ln.kthelement_from_end(2).data
+        
+        
     
-    print ln.print_list()
-    
-    print ln.search("Mamata")
-    
-    ln.delete("Anil")
-    ln.delete("macchar")
-    ln.delete("Bhola")
-    ln.delete("Jyoti")
-    ln.insert_at_front("Chunki")
-    
-    print ln.print_list()
-    
+
