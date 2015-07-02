@@ -3,7 +3,9 @@ Created on Jul 2, 2015
 
 @author: Debanjan Mahata
 '''
-
+"""
+Problem Source:http://www.geeksforgeeks.org/lowest-common-ancestor-in-a-binary-search-tree/
+"""
 
 def lcaBST(root, n1, n2):
     while root != None:
