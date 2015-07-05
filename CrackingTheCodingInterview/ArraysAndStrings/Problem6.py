@@ -23,16 +23,12 @@ def rotate_matrix_90(matrix,n):
             
             offset = i - first
             
-            top = matrix[first][i]
-            print (first,i),top
+            temp = matrix[first][i]
             matrix[first][i] = matrix[last-offset][first]
-            print (last-offset,first),matrix[last-offset][first]
-            print matrix[last-offset][first]
             matrix[last-offset][first] = matrix[last][last-offset]
-            print matrix[last][last-offset]
             matrix[last][last-offset] = matrix[i][last]
-            print matrix[i][last]
-            matrix[i][last] = top
+            matrix[i][last] = temp
+            
             
             
 def transpose(m,n):
