@@ -46,7 +46,6 @@ class TreeNode:
         if self.hasRightChild():
             self.rightChild.parent = self
 
-
 class BinarySearchTree:
 
     def __init__(self):
@@ -59,38 +58,50 @@ class BinarySearchTree:
     def __len__(self):
         return self.size
 
+    def __iter__(self):
+        return self.root.__iter__()
+    
+    def __setitem__(self,k,v):
+        self.put(k,v)
+    
     def put(self,key,val):
+        """
+        Starting at the root of the tree, search the binary tree comparing the new key to the key in the current node. 
+        If the new key is less than the current node, search the left subtree. 
+        If the new key is greater than the current node, search the right subtree.
+        When there is no left (or right) child to search, we have found the position in the tree where the new node should be installed.
+        To add a node to the tree, create a new TreeNode object and insert the object at the point discovered in the previous step.
+        """
+
         if self.root:
             self._put(key,val,self.root)
         else:
             self.root = TreeNode(key,val)
         self.size = self.size + 1
-
+    
     def _put(self,key,val,currentNode):
         if key < currentNode.key:
             if currentNode.hasLeftChild():
-                self._put(key,val,currentNode.leftChild)
+                   self._put(key,val,currentNode.leftChild)
             else:
-                currentNode.leftChild = TreeNode(key,val,parent=currentNode)
+                   currentNode.leftChild = TreeNode(key,val,parent=currentNode)
         else:
             if currentNode.hasRightChild():
-                self._put(key,val,currentNode.rightChild)
+                   self._put(key,val,currentNode.rightChild)
             else:
-                currentNode.rightChild = TreeNode(key,val,parent=currentNode)
-
-    def __setitem__(self,k,v):
-        self.put(k,v)
-
+                   currentNode.rightChild = TreeNode(key,val,parent=currentNode)
+                   
+                   
     def get(self,key):
         if self.root:
             res = self._get(key,self.root)
             if res:
-                return res.payload
+                   return res.payload
             else:
-                return None
+                   return None
         else:
             return None
-
+    
     def _get(self,key,currentNode):
         if not currentNode:
             return None
@@ -100,29 +111,33 @@ class BinarySearchTree:
             return self._get(key,currentNode.leftChild)
         else:
             return self._get(key,currentNode.rightChild)
-
+        
+    def __contains__(self,key):
+        if self._get(key,self.root):
+            return True
+        else:
+            return False
+    
     def __getitem__(self,key):
         return self.get(key)
-
-    def __contains__(self,key):
-       if self._get(key,self.root):
-           return True
-       else:
-           return False
-
+    
+    
     def delete(self,key):
-      if self.size > 1:
-         nodeToRemove = self._get(key,self.root)
-         if nodeToRemove:
-             self.remove(nodeToRemove)
-             self.size = self.size-1
-         else:
-             raise KeyError('Error, key not in tree')
-      elif self.size == 1 and self.root.key == key:
-         self.root = None
-         self.size = self.size - 1
-      else:
-         raise KeyError('Error, key not in tree')
+       if self.size > 1:
+          nodeToRemove = self._get(key,self.root)
+          if nodeToRemove:
+              self.remove(nodeToRemove)
+              self.size = self.size-1
+          else:
+              raise KeyError('Error, key not in tree')
+       elif self.size == 1 and self.root.key == key:
+          self.root = None
+          self.size = self.size - 1
+       else:
+          raise KeyError('Error, key not in tree')
+      
+      
+
 
     def __delitem__(self,key):
        self.delete(key)
@@ -204,14 +219,20 @@ class BinarySearchTree:
                                     currentNode.rightChild.payload,
                                     currentNode.rightChild.leftChild,
                                     currentNode.rightChild.rightChild)
+                 
+                 
 
-if __name__ == "__main__":
+
+
+
+        
     
+    
+if __name__ === "__main__":
     mytree = BinarySearchTree()
     mytree[3]="red"
     mytree[4]="blue"
     mytree[6]="yellow"
     mytree[2]="at"
     
-    print(mytree[6])
-    print(mytree[2])
+    
